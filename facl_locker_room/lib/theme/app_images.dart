@@ -1,3 +1,3 @@
 abstract class AppImages{
-    static String get safeLock => 'assets/images/safe.png';
+    static String get safeLock => 'assets/image/safe.png';
 }
