@@ -77,7 +77,7 @@ flutter:
   fonts:
     - family: Satoshi Variable
       fonts:
-        - asset: font/Satoshi-Variable.ttf
+        - asset: font/Satoshi-Regular.otf
         
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

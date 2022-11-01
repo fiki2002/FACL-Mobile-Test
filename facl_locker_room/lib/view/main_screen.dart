@@ -1,28 +1,35 @@
-import 'package:facl_locker_room/theme/app_fonts.dart';
+import 'package:facl_locker_room/view/components/stacked_container.dart';
 import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
-import 'components/container.dart';
+import 'components/custom_button.dart';
 import 'components/header.dart';
 import 'components/welcome_message.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
   @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  Color firstColor = AppColors.customPurple;
+  String firstText = 'Version 1.0';
+  @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(
-        alignment: Alignment.center,
         children: [
           Column(
             children: [
               Container(
-                width: 411,
-                height: 415,
-                color: AppColors.customPurple,
+                width: w,
+                height: h * 0.54,
+                color: firstColor,
                 child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Header(),
                     SizedBox(
@@ -43,45 +50,61 @@ class MainScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const Expanded(
-                child: SizedBox(),
-              ),
+              const Spacer(),
               Expanded(
                 child: Column(
-                  children: const [
-                    CustomContainer(
+                  children: [
+                    CustomButton(
                       title: 'Get Started',
+                      callback: () {
+                        setState(() {
+                          firstText = 'Version 1.1';
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              elevation: 5,
+                              backgroundColor: AppColors.alternateBg1,
+                              content: Text(
+                                'New background color has been updated to green',
+                              ),
+                              duration: Duration(seconds: 1),
+                            ),
+                          );
+                          firstColor = AppColors.alternateBg1;
+                        });
+                      },
                     ),
-                    SizedBox(height: 20),
-                    CustomContainer(
+                    const SizedBox(height: 20),
+                    CustomButton(
                       title: 'I already have an account',
+                      callback: () {
+                        setState(
+                          () {
+                            firstText = 'Version 0.9';
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                elevation: 5,
+                                backgroundColor: AppColors.alternateBg2,
+                                content: Text(
+                                    'New background color has been updated to purple'),
+                                duration: Duration(seconds: 1),
+                              ),
+                            );
+                            firstColor = AppColors.alternateBg2;
+                          },
+                        );
+                      },
                     ),
                   ],
                 ),
               )
             ],
           ),
-          Container(
-            height: 20,
-            width: 128,
-            padding: const EdgeInsets.only(
-              top: 4,
+          Positioned(
+            top: h * 0.525,
+            left: w * 0.32,
+            child: StackedContainer(
+              text: firstText,
             ),
-            margin: const EdgeInsets.only(
-              top: 45,
-            ),
-            decoration: BoxDecoration(
-              color: AppColors.bgContainerPurple,
-              borderRadius: BorderRadius.circular(25),
-            ),
-            child: Text('Version 1.0',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: AppFonts.satoshiVariable,
-                  color: AppColors.customWhite,
-                )),
           ),
         ],
       ),

@@ -3,21 +3,19 @@ import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_fonts.dart';
 
-class CustomContainer extends StatefulWidget {
-  const CustomContainer({
+class CustomButton extends StatelessWidget {
+  const CustomButton({
     super.key,
     required this.title,
+    required this.callback,
   });
   final String title;
+  final Function() callback;
 
-  @override
-  State<CustomContainer> createState() => _CustomContainerState();
-}
-
-class _CustomContainerState extends State<CustomContainer> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: callback,
       child: Container(
         height: 48,
         width: 312,
@@ -35,7 +33,7 @@ class _CustomContainerState extends State<CustomContainer> {
           ),
         ),
         child: Text(
-          widget.title,
+          title,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: AppColors.secondaryText,

@@ -13,6 +13,7 @@ class FACLApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: MainScreen(),
       title: 'FACL Locker Room',
     );
